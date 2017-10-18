@@ -1,0 +1,16 @@
+Events (eventos que podem acontecer no sistema)
+- ClientRegistered
+- AccountCreated
+- MoneyDeposited
+- MoneyWithdrew
+
+Commands (requisições, pedidos ao sistema)
+- RegisterClient
+- CreateAccount
+- SendEmail
+- DepositMoney
+- WithdrawMoney
+
+Exceptions
+- WithoutMoneyToWithdraw
+- ClientAlreadyExists
