@@ -10,7 +10,7 @@ class Event extends Model
     public $timestamps = false;
 	
     protected $fillable = [
-        'event_type', 'event_data'
+        'type', 'data'
     ];
 
     public static function boot()

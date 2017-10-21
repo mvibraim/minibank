@@ -9,6 +9,7 @@ body {
 
 h4 {
 	margin: 0 0 30px 0;
+	padding: 0 48px 0 48px;
 }
 
 .bd-navbar {
@@ -29,8 +30,8 @@ h4 {
     background-color: #f8f9fa !important;
 }
 
-.border {
-    border: 1px solid #e9ecef !important;
+.border-left {
+    border-left: 10px solid #e9ecef !important;
 }
 
 .border-white {
@@ -39,25 +40,29 @@ h4 {
 
 @media (min-width: 768px) {
 	.p-md-5 {
-	    padding: 48px !important;
+	    padding: 48px 0 48px 0 !important;
 	}
 }
 
-.p-3 {
-    padding: 16px !important;
-}
-
-.container .row div div {
+.container .row div .option, .container .row div .messages, .container .row div .event {
 	margin: 0;
 	height: 50px;
-	padding-top: 13px;
+	padding: 13px 48px 0 48px;
+}
+
+.event, .account {
+	position: relative;
+}
+
+.container .row div .email {
+	margin: 0 48px 14px 48px;
+	width: 79.5%;
 }
 
 .glyphicon {
 	color: #7952b3;
-	font-size: 25px;
-	font-weight: 900;
-	margin-left: 20px
+	margin-left: 20px;
+	font-size: 15px
 }
 
 .btn-bd-purple {
@@ -72,6 +77,37 @@ h4 {
     border-color: #7952b3;
 }
 
-.button-container {
+.float-right {
 	float: right;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.btn-modal-purple, .btn-modal-purple:hover, .btn-modal-purple:focus {
+    font-weight: 500;
+    color: #fff;
+    border-color: #7952b3;
+    background-color: #7952b3;
+}
+
+.option:hover {
+	background-color: #e9ecef;
+}
+
+.option-selected {
+	background-color: #e9ecef;
+}
+
+.temp-height {
+	height: 400px;
+}
+
+.red_message {
+	color: red;
+}
+
+.green_message {
+	color: green;
 }

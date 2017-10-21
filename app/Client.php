@@ -6,17 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-	protected $primaryKey = 'cpf';
-    public $incrementing = false;
-
     public $timestamps = false;
 	
     protected $fillable = [
-        'name', 'cpf'
+        'name'
     ];
 
-    public function accounts()
+    public function aggregates()
     {
-        return $this->hasMany('App\Accounts');
+        return $this->hasMany('App\Aggregate');
     }
 }

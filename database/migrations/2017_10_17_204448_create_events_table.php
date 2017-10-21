@@ -15,10 +15,10 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('account_id')->unsigned();
-            $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
-            $table->string('event_data');
-            $table->integer('event_type');
+            $table->integer('aggregate_id')->unsigned();
+            $table->foreign('aggregate_id')->references('id')->on('aggregates')->onDelete('cascade');
+            $table->float('data');
+            $table->integer('type');
             $table->timestamp('created_at');
         });
     }
