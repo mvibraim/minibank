@@ -40,6 +40,10 @@ app.factory('service', function($http) {
 			return $http.post(prefix + 'withdrawMoney', {'account_id': account_id, 'amount': amount});
 		},
 
+		sendEmail: function(client_name) {
+			return $http.post(prefix + 'sendEmail', {'client_name': client_name});
+		},
+
 		replay: function(account_id, event_limit) {
 			return $http.get(prefix + 'replay/' + account_id + "/" + event_limit);
 		}
@@ -136,13 +140,13 @@ app.controller('controller', function($scope, service, $timeout) {
 	$scope.showNoClients = false;
 	$scope.showNoAccounts = false;
 
-	$scope.spinnerButtonReplay = {radius: 8, lines: 7, width: 7, left: "81%"};
-	$scope.spinnerBalanceReplay = {radius: 8, lines: 7, width: 7, left: "26%"};
+	$scope.spinnerButtonReplay = {radius: 8, lines: 8, width: 7, left: "81%"};
+	$scope.spinnerBalanceReplay = {radius: 8, lines: 8, width: 7, left: "26%"};
 
 	$scope.getClients = function() {
 		$scope.showSpinnerClients = true;
 
-		$timeout( function(){
+		$timeout( function() {
 	        service.getClients().then(function(response) {
 	            $scope.clients = response.data;
 	            $scope.showSpinnerClients = false;
@@ -187,7 +191,7 @@ app.controller('controller', function($scope, service, $timeout) {
 		$scope.accounts = undefined;
 		$scope.showSpinnerAccounts = true;
 
-		$timeout( function(){
+		$timeout( function() {
 	        service.getAccounts(client_id).then(function(response) {
 	            $scope.accounts = response.data.accounts;
 	            var event_counts = response.data.event_counts;
@@ -207,9 +211,18 @@ app.controller('controller', function($scope, service, $timeout) {
 	    }, 200 );
 	}
 
+	$scope.sendEmail = function(client_name) {
+        service.sendEmail(client_name).then(function(response) {})
+	}
+
 	$scope.createAccount = function(client_id) {
         service.createAccount(client_id).then(function(response) {
         	$('#create-account').modal('hide');
+
+        	var index_client = _.findIndex($scope.clients, function(o) { return o.id == client_id; });
+        	var client_name = $scope.clients[index_client].name;
+        	$scope.sendEmail(client_name);
+
         	$scope.accounts.push({id: parseInt(response.data), balance: 0, events_applied: 1});
         	$scope.showNoAccounts = false;
         })
@@ -219,7 +232,7 @@ app.controller('controller', function($scope, service, $timeout) {
 		$scope.events = undefined;
 		$scope.showSpinnerEvents = true;
 
-		$timeout( function(){
+		$timeout( function() {
 	        service.getEvents(account_id).then(function(response) {
 	            $scope.events = response.data;
 	            $scope.showSpinnerEvents = false;
@@ -233,7 +246,7 @@ app.controller('controller', function($scope, service, $timeout) {
 	}
 
 	$scope.depositMoney = function(account_id, amount) {
-		$timeout( function(){
+		$timeout( function() {
 	        service.depositMoney(account_id, amount).then(function(response) {
 	        	$('#deposit').modal('hide');
 	        	$scope.deposit_amount = undefined;
@@ -254,7 +267,7 @@ app.controller('controller', function($scope, service, $timeout) {
 	}
 
 	$scope.withdrawMoney = function(account_id, amount) {
-		$timeout( function(){
+		$timeout( function() {
 	        service.withdrawMoney(account_id, amount).then(function(response) {
 	        	if(typeof response.data == "string")
 	        		$scope.exception_message = response.data;
@@ -292,7 +305,7 @@ app.controller('controller', function($scope, service, $timeout) {
 		$scope.showSpinnerReplay = true;
 		$scope.clicked_index = event_limit - 1;
 
-		$timeout( function(){
+		$timeout( function() {
 	        service.replay(account_id, event_limit).then(function(response) {
 	            var new_balance = response.data;
 	            

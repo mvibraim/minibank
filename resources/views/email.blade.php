@@ -1,0 +1,1 @@
+<strong>{{ $client_name }}</strong> created an account

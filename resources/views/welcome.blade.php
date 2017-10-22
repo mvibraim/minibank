@@ -36,10 +36,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 p-md-5 bg-light" ng-class="{'temp-height': showSpinnerClients}">
-                    <h4>
+                    <h4 ng-cloak>
                         Clients
-                        <span ng-if="clients.length > 0" ng-cloak>([[ clients.length ]])</span>
-                        <span class="glyphicon glyphicon-plus pointer" data-toggle="modal" data-target="#add-client"></span>
+                        <span ng-if="clients.length > 0">([[ clients.length ]])</span>
+                        <span class="glyphicon glyphicon-plus pointer" data-toggle="modal" data-target="#add-client" ng-if="!showSpinnerClients"></span>
                     </h4>
 
                     <span us-spinner spinner-on="showSpinnerClients"></span>
@@ -50,13 +50,11 @@
                 </div>
 
                 <div class="col-md-5 p-md-5 border-left border-white bg-light" ng-class="{'temp-height': showSpinnerAccounts}">
-                    <h4>
+                    <h4 ng-cloak>
                         Accounts
-                        <span ng-if="accounts.length > 0"  ng-cloak>([[ accounts.length ]])</span>
-                        <span class="glyphicon glyphicon-plus pointer" data-toggle="modal" data-target="#create-account" ng-if="selected_client_id != undefined" ng-cloak></span>
+                        <span ng-if="accounts.length > 0">([[ accounts.length ]])</span>
+                        <span class="glyphicon glyphicon-plus pointer" data-toggle="modal" data-target="#create-account" ng-if="selected_client_id != undefined && !showSpinnerAccounts"></span>
                     </h4>
-
-                    <input type="email" class="form-control email" placeholder="CFO email" ng-model="cfo_email" maxlength="190" ng-if="selected_client_id != undefined" ng-cloak>
 
                     <span us-spinner spinner-on="showSpinnerAccounts"></span>
 
