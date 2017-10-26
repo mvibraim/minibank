@@ -46,7 +46,7 @@
                     
                     <div ng-repeat="client in clients" class="option pointer" ng-click="selectClient(client.id)" ng-class="{'option-selected': client.id == selected_client_id}" ng-cloak>[[client.name | capitalize]]</div>
 
-                    <div ng-if="showNoClients" class="messages" ng-cloak>There are no clients</div>
+                    <div ng-if="showNoClients" class="messages" ng-cloak>There are no clients. Add a client.</div>
                 </div>
 
                 <div class="col-md-5 p-md-5 border-left border-white bg-light" ng-class="{'temp-height': showSpinnerAccounts}">
@@ -70,8 +70,8 @@
                         </span>
                     </div>
 
-                    <div ng-if="showNoAccounts" class="messages" ng-cloak>This client does not have an account</div>
-                    <div ng-if="clients != undefined && clients.length > 0 && selected_client_id == undefined" class="messages" ng-cloak>Select a client</div>
+                    <div ng-if="showNoAccounts" class="messages" ng-cloak>This client does not have an account. Add an account.</div>
+                    <div ng-if="clients != undefined && clients.length > 0 && selected_client_id == undefined" class="messages" ng-cloak>Select a client.</div>
                 </div>
 
                 <div class="col-md-4 p-md-5 border-left border-white bg-light" ng-class="{'temp-height': showSpinnerEvents}">
@@ -92,7 +92,7 @@
                         </span>
                     </div>
 
-                    <div ng-if="accounts != undefined && accounts.length > 0 && selected_account_id == undefined" class="messages" ng-cloak>Select an account</div>
+                    <div ng-if="accounts != undefined && accounts.length > 0 && selected_account_id == undefined" class="messages" ng-cloak>Select an account.</div>
                 </div>
             </div>
         </div>
