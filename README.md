@@ -35,7 +35,7 @@ php artisan serve
 ### Run
 It is not necessary to run Apache, MySQL and php artisan serve, because the tests run in memory
 
-* Open the command prompt and run:
+* Open the command prompt and run (with backslash, not slash):
 ```
 vendor\bin\phpunit
 ```
