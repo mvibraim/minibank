@@ -33,7 +33,7 @@ php artisan serve
 ## Unit and Feature Tests
 
 ### Run
-It is not necessary to run Apache, MySQL and php artisan serve, because the tests run in memory
+It is not necessary to run Apache, MySQL and php artisan serve before run tests, because the tests run in memory
 
 * Open the command prompt and run (with backslash, not slash):
 ```
