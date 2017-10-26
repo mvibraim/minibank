@@ -22,7 +22,7 @@ php artisan migrate
 * Open the inbox and open the SMTP Settings tab. The SMTP username and password values will be shown
 * Open the .env file in the project root and fill MAIL_USERNAME and MAIL_PASSWORD variables with the SMTP username and password
 
-The last three steps are required to verify email sending when creating an account
+The last three steps are required to verify email sending when creating an account. When you create an account in MiniBank, emails will be sent to the Mailtrap inbox
 
 * Run the XAMPP Control Panel and start Apache and MySQL. At the prompt, run:
 ```
