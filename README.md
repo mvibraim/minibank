@@ -13,7 +13,7 @@ Developed in Windows
 ```
 cd\ && cd xampp/htdocs && git clone https://github.com/bigmarcolino/minibank.git && cd minibank && npm install && npm run prod && composer install
 ```
-* Open http://localhost/phpmyadmin in the browser and create a database called "minibank" with the utf8mb4_unicode_ci collation
+* Open http://localhost/phpmyadmin and create a database called "minibank" with the utf8mb4_unicode_ci collation
 * Go back to command prompt and run:
 ```
 php artisan migrate
@@ -28,7 +28,7 @@ The last three steps are required to verify email sending when creating an accou
 ```
 php artisan serve
 ```
-* In the browser, open http://localhost:8000 to open the MiniBank website
+* Open http://localhost:8000 to open the MiniBank website
 
 ## Unit and Feature Tests
 
