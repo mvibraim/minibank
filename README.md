@@ -11,7 +11,7 @@ Developed in Windows
 ### Step by step
 * Open the command prompt and run:
 ```
-cd\ && cd xampp/htdocs && git clone https://github.com/bigmarcolino/minibank.git && cd minibank && npm install && npm run prod && composer install
+cd\ && cd xampp/htdocs && git clone https://github.com/bigmarcolino/minibank.git && cd minibank && npm i && npm run prod && composer install
 ```
 * Open http://localhost/phpmyadmin and create a database called "minibank" with the utf8mb4_unicode_ci collation
 * Go back to command prompt and run:
