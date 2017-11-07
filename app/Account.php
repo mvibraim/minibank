@@ -4,6 +4,8 @@ namespace App;
 
 use App\Aggregate;
 use App\EventTypes;
+use App\EventStore;
+use App\Event;
 
 class Account
 {
@@ -37,7 +39,7 @@ class Account
         }
     }
  
-    function __construct2($aggregate_id, $event_limit) {
+    public function __construct2($aggregate_id, $event_limit) {
         $this->id = $aggregate_id;
 
         $aggregate = Aggregate::where('id', $aggregate_id)->first();
@@ -51,5 +53,23 @@ class Account
             else if( $event->type == EventTypes::getValue("MONEY_WITHDREW") )
                 $this->balance -= $event->data;
         }
+    }
+
+    public function create($client, $aggregate) {
+        $client->aggregates()->save($aggregate);
+        $event = new Event(['type' => EventTypes::getValue('ACCOUNT_CREATED'), 'data' => 0]);
+        EventStore::save($aggregate, $event);
+    }
+
+    public function deposit($aggregate, $amount) {
+        $event = new Event(['type' => EventTypes::getValue('MONEY_DEPOSITED'), 'data' => $amount]);
+        EventStore::save($aggregate, $event);
+        return $event;
+    }
+
+    public function withdraw($aggregate, $amount) {
+        $event = new Event(['type' => EventTypes::getValue('MONEY_WITHDREW'), 'data' => $amount]);
+        EventStore::save($aggregate, $event);
+        return $event;
     }
 }

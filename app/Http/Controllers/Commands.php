@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Client;
-use App\EventStore;
 use App\Account;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailAccountCreated;
@@ -18,25 +17,22 @@ class Commands extends Controller
         $client = Client::where('id', $client_id)->first();
 
         $aggregate = $request->get('aggregate');
-        $event = $request->get('event');
 
-        $client->aggregates()->save($aggregate);
-
-        EventStore::save($aggregate, $event);
+        (new Account())->create($client, $aggregate);
 
         return $aggregate->id;
     }
 
     public function depositMoney(Request $request)
     {
+        $amount = json_decode($request->getContent(), true)['amount'];
         $aggregate = $request->get('aggregate');
-        $event = $request->get('event');
 
-        EventStore::save($aggregate, $event);
+        $new_event = (new Account())->deposit($aggregate, $amount);
 
         $account = new Account($aggregate->id);
 
-        return ['new_event' => $event, 'new_balance' => $account->balance];
+        return ['new_event' => $new_event, 'new_balance' => $account->balance];
     }
 
     public function withdrawMoney(Request $request)
@@ -46,14 +42,14 @@ class Commands extends Controller
         if($exception != null)
             return $exception;
         else {
+            $amount = json_decode($request->getContent(), true)['amount'];
             $aggregate = $request->get('aggregate');
-            $event = $request->get('event');
 
-            EventStore::save($aggregate, $event);
+            $new_event = (new Account())->withdraw($aggregate, $amount);
 
             $account = new Account($aggregate->id);
 
-            return ['new_event' => $event, 'new_balance' => $account->balance];
+            return ['new_event' => $new_event, 'new_balance' => $account->balance];
         }        
     }
 
